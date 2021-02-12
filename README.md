@@ -65,7 +65,7 @@ In order for the other group members to work together on the forked copy of the 
 
 All group members should clone the forked repository which can now be used as a repository for collaborating on the code.
 
-#### Clone the start-code repository
+#### Clone the testing repository
 
 In addition, each group member should clone (but not fork) the following project:
 
@@ -145,7 +145,7 @@ In addition to the three classes above, the RPC layer contains the following
 
 The `void stop()` method should be considered an internal RPC method and uses RPC identifier 0. This (reserved) identifier should not be used when implementing other RPC methods using the RPC layer.
 
-The abstract class `RPCStub` will be relevant in task 3 as the client-side of an RPC-call is to extend this class such that it gets access to the RPC middleware for making remote calls. The interface `RPCImpl` is also to be used in task 3 as the server-side of an RPC call (where the remote method is actually implemented) is to implement this interface by implementing teh `invoke` method that will do the unmarshalling/marshalling of parameters/return value for the concrete remote method. 
+The abstract class `RPCStub` will be relevant in task 3 as the client-side of an RPC-call is to extend this class such that it gets access to the RPC middleware for making remote calls. The interface `RPCImpl` is also to be used in task 3 as the server-side of an RPC call (where the remote method is actually implemented) is to implement this interface by implementing teh `invoke` method that will do the unmarshalling/marshalling of parameters/return value for the concrete remote method.
 
 **Optional challenges:** If you have time, you may consider implementing an RPC layer where methods can have more than a single parameter. Also, you may investigate how to implement the automatic code generation of the client-side and server-side stub-code which would be a first step towards supporting arbitrary Java-objects as parameter and return types. Finally, you may consider making the RPC server multi-threaded such that multiple simultaneous clients can be handled.
 
