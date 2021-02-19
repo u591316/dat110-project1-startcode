@@ -43,7 +43,7 @@ This in turn means that the project is comprised of three main tasks
 2. Implementation of a light-weight RPC layer and distributed systems middleware on top of the messaging layer
 3. Application of the RPC layer for realising a small IoT network application comprised of a sensor, and display, and a controller
 
-### Getting Started
+### Getting started - obtaining the startcode and unit-test projects
 
 The start-code and code containing unit tests is available via git.
 
@@ -51,7 +51,7 @@ There is a page on Canvas (from the DAT100 course) which revisits the most impor
 
 https://hvl.instructure.com/courses/15566/pages/videoer-om-bruk-av-git-fra-dat100?module_item_id=348584
 
-#### Fork and Clone the start-code repository
+#### Fork and clone the start-code repository
 
 One member of the group should start by entering the following repository on github:
 
