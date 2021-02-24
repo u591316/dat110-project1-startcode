@@ -125,7 +125,7 @@ The format of the request message (which method and parameter value) and respons
 
 The implementation of the RPC layer is to be located in the `no.hvl.dat110.rpc` package. You are required to provide the missing method implementations in the following classes
 
-- `RPCUtils.java` containing utility methods for the unmarshalling and marshalling of the supported data types. The implementation of the marshalling/unmarshalling of `booleans` is provided and can be used for inspiration. Remember that an integer in Java is 4 bytes.
+- `RPCUtils.java` containing utility methods for the unmarshalling and marshalling of the supported data types. The implementation of the marshalling/unmarshalling of `booleans` is provided and can be used for inspiration. **Hint** Remember that an integer in Java is 4 bytes and see byte buffers in Java: https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/nio/ByteBuffer.html
 
 - `RPCClient.java` implementing the client-side of the RPC layer using the client-side of the underlying messaging layer for communication.
 
