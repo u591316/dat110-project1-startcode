@@ -1,6 +1,6 @@
 ## DAT110 - Project 1: Socket Programming and RPC middleware
 
-The tasks related to this project will be part of the lab exercises in the next two weeks.
+The tasks related to this project will be part of the lab exercises in the next two weeks. The project was introduced in the lectures and two videos: one introducing the project and one introducing RPC is available on Canvas.
 
 ### Organisation
 
@@ -12,7 +12,7 @@ The deadline for handing in the project can be found in Canvas.
 
 ### Overview
 
-The project builds on socket programming and network applications and aims to consolidate important concepts in the course: layering, services, protocols, headers, encapsulation/decapsulation, remote procedure calls (RPC), and marshalling/unmarshalling.
+The project builds on socket programming and network applications, and aims to consolidate important concepts in the course: layering, services, protocols, headers, encapsulation/decapsulation, remote procedure calls (RPC), and marshalling/unmarshalling.
 
 The end-goal of the project is to implement a small IoT system consisting of a temperature sensor application, a controller application, and a display application. The controller is to request the current temperature from the temperature sensor and then request the display to show the temperature. The overall system is illustrated below.
 
@@ -49,8 +49,6 @@ The start-code and code containing unit tests is available via git.
 
 There is a page on Canvas (from the DAT100 course) which revisits the most important git operations (for those that fell a bit rusty on git)
 
-https://hvl.instructure.com/courses/15566/pages/videoer-om-bruk-av-git-fra-dat100?module_item_id=348584
-
 #### Fork and clone the start-code repository
 
 One member of the group should start by entering the following repository on github:
@@ -59,11 +57,11 @@ https://github.com/selabhvl/dat110-project1-startcode.git
 
 and then do a *Fork* of the repository (see button in the upper right of the repository web page).
 
-This will create a "copy" of the start-code repository on the group members own github repository account.
+This will create a "copy" of the start-code repository on that group members own github repository account.
 
-In order for the other group members to work together on the forked copy of the start-code, the other group members must be provided with access to read/write on the forked repository. See *Settings* and *Manage Access* for the repository.
+In order for the other group members to work together on the forked copy of the start-code, the other group members must be provided with access to read/write on the forked repository. See *Settings* and *Manage Access* for the repository that was forked.
 
-All group members should clone the forked repository which can now be used as a repository for collaborating on the code.
+The other group members should clone the forked repository which can now be used as a repository for collaborating on the code.
 
 #### Clone the testing repository
 
@@ -93,7 +91,9 @@ The implementation of the messaging service is to be located in the `no.hvl.dat1
 
 You are required to implement the methods marked with `TODO` in the following classes
 
-- `Message.java` implementing methods for encapsulation and decapsulation of payload data according to the segment format described above.
+- `Message.java` adding a check in the constructor that the data is not null and not longer than 127 bytes
+
+- `MessageUtils.java` implementing methods for encapsulation and decapsulation of data according to the segment format described above.
 
 - `Connection.java` implementing the connection abstraction linking the connection to the underlying TCP socket and associated input and output data streams that is to be used for sending and receiving message.
 
@@ -107,9 +107,9 @@ Unit-tests for the messaging layer can be found in the `no.hvl.dat110.messaging.
 
 ### Task 2: RPC layer
 
-In this task you will implement a light-weight RPC middleware on top of the messaging layer. The RPC layer is also based on a client-server architecture in which the client-side is able to perform remote procedure calls on objects located on the server-side.
+In this task you will implement a light-weight RPC middleware on top of the messaging layer from task 1. The RPC layer is also based on a client-server architecture in which the client-side is able to perform remote procedure calls on objects located on the server-side.
 
-The basic idea of RPC is that a process can execute method (procedure) calls over the network on remote objects residing inside other processes. This is illustrated in the figure below in which a client invokes a method on a local-object (also called a stub/proxy) object while actual execution of the body of the method takes place in the remote object located on another machine and implementing the actual functionality of the method.
+The basic idea of RPC is that a process can execute method (procedure) calls over the network on remote objects residing inside other processes. This is illustrated in the figure below in which a client invokes a method on a local-object (also called a stub/proxy) object while the actual execution of the method body takes place in the remote object located on another machine and implementing the actual functionality of the method.
 
 ![](assets/markdown-img-paste-20200124152725863.jpg)
 
@@ -137,7 +137,7 @@ In addition to the three classes above, the RPC layer contains the following
 
 - `RPCImpl.java` specifying an interface containing an `invoke` method that any server-side class exposing a remote method **must implement**. This `invoke` method should handle the unmarshalling of the parameters, then call the real underlying remote method implementation, and finally marshall the return value. It is this `invoke`-method that the RPC server will call in order to have the RPC call executed.
 
-- `RPCStub.java` implementing a `register` method that allows a client-side stub to be registered in the RPC middleware. Any client-side stub must extend this class and implement the client-side stub. This is required in order for the stub-implementation to be able to use the `call`-method of the RPC client-side middelware in order to execute the call.
+- `RPCStub.java` implementing a `register` method that allows a client-side stub to be registered in the RPC middleware. Any client-side stub must extend this class and implement the client-side stub. This is required in order for the stub-implementation to be able to use the `call`-method of the RPC client-side middleware in order to execute the call.
 
 - `RPCServerStopImpl.java` implementing the server-side of a remote method `void stop()` which the client-side can use to terminate the server. The class illustrates the server-side implementation of an RPC method and how first parameters must be unmarshalled, then the underlying method called, and then the marshalling of the return value.
 
@@ -145,13 +145,13 @@ In addition to the three classes above, the RPC layer contains the following
 
 The `void stop()` method should be considered an internal RPC method and uses RPC identifier 0. This (reserved) identifier should not be used when implementing other RPC methods using the RPC layer.
 
-The abstract class `RPCStub` will be relevant in task 3 as the client-side of an RPC-call is to extend this class such that it gets access to the RPC middleware for making remote calls. The interface `RPCImpl` is also to be used in task 3 as the server-side of an RPC call (where the remote method is actually implemented) is to implement this interface by implementing teh `invoke` method that will do the unmarshalling/marshalling of parameters/return value for the concrete remote method.
+The abstract class `RPCStub` will be relevant in task 3 as the client-side of an RPC-call is to extend this class such that it gets access to the RPC middleware for making remote calls. The interface `RPCImpl` is also to be used in task 3 as the server-side of an RPC call (where the remote method is actually implemented) is to implement this interface by implementing the `invoke` method that will do the unmarshalling/marshalling of parameters/return value for the concrete remote method.
 
 **Optional challenges:** If you have time, you may consider implementing an RPC layer where methods can have more than a single parameter. Also, you may investigate how to implement the automatic code generation of the client-side and server-side stub-code which would be a first step towards supporting arbitrary Java-objects as parameter and return types. Finally, you may consider making the RPC server multi-threaded such that multiple simultaneous clients can be handled.
 
 ### Task 3: Using the RPC layer for an IoT network application
 
-In this task you will use the RPC layer to implement the IoT system comprised of a controller, a (temperature) sensor, and a display. The controller should play the role of an RPC client while the sensor and display take the role of RPC servers.
+In this task you will use the RPC layer from task 2 to implement the IoT system comprised of a controller, a (temperature) sensor, and a display. The controller should play the role of an RPC client while the sensor and display take the role of RPC servers.
 
 The controller should regularly retrieve the current temperature using a `int read()` RPC call on the sensor and then use a `void write(String str)` RPC call on the display to show the current temperature. The principle is illustrated in the figure below.
 
@@ -203,6 +203,6 @@ You can run the individual devices and the controller in separate JVMs by starti
 
 ### Handing in the project
 
-Each group must hand in a link on Canvas to a git-repository containing their implementation and a screen-shot showing the result of running all the unit-tests.
+Each group must hand in a **link** on Canvas to a git-repository containing their implementation and a **screen-shot** showing the result of running all the unit-tests.
 
-Please remember to hand-in as a member of a group in Canvas: https://hvl365-my.sharepoint.com/:w:/g/personal/akv_hvl_no/EdkQXNKVjmhPrHNtD3n5r74B6KSb7DwmVYf9MA3SIUA4Sw?e=hC5Q9i
+Remember to hand-in as a group as described in the guide available on Canvas.
