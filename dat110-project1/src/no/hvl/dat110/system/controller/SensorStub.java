@@ -3,20 +3,25 @@ package no.hvl.dat110.system.controller;
 import no.hvl.dat110.TODO;
 import no.hvl.dat110.rpc.*;
 
-public class Sensor extends RPCStub {
+public class SensorStub extends RPCLocalStub {
 
-	private byte RPCID = 1;
+	private byte RPCIDREAD = 1;
+	
+	public SensorStub(RPCClient rpcclient) {
+		super(rpcclient);
+	}
 	
 	public int read() {
 		
-		int temp;
+		int temp = 0;
 		
-		// TODO
+		// TODO - START
 		// implement marshalling, call and unmarshalling for read RPC method
 		
-		if (true) {
+		if (true)
 			throw new UnsupportedOperationException(TODO.method());
-		}
+		
+		// TODO - END
 		
 		return temp;
 	}

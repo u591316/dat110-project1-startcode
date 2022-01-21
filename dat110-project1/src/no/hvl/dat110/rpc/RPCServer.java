@@ -12,23 +12,23 @@ public class RPCServer {
 	private MessagingServer msgserver;
 	private Connection connection;
 	
-	// hashmap to register RPC methods which are required to implement RPCImpl
-	
-	private HashMap<Integer,RPCImpl> services;
+	// hashmap to register RPC methods which are required to extend RPCRemoteImpl	
+	private HashMap<Byte,RPCRemoteImpl> services;
 	
 	public RPCServer(int port) {
 		
 		this.msgserver = new MessagingServer(port);
-		this.services = new HashMap<Integer,RPCImpl>();
+		this.services = new HashMap<Byte,RPCRemoteImpl>();
 		
-		// the stop RPC methods is built into the server
-		services.put((int)RPCCommon.RPIDSTOP,new RPCServerStopImpl());
 	}
 	
 	public void run() {
 		
-		System.out.println("RPC SERVER RUN - Services: " + services.size());
+		// the stop RPC method is built into the server
+		RPCRemoteImpl rpcstop = new RPCServerStopImpl(RPCCommon.RPIDSTOP,this);
 		
+		System.out.println("RPC SERVER RUN - Services: " + services.size());
+			
 		connection = msgserver.accept(); 
 		
 		System.out.println("RPC SERVER ACCEPTED");
@@ -37,18 +37,20 @@ public class RPCServer {
 		
 		while (!stop) {
 	    
-		   int rpcid;
+		   byte rpcid = 0;
+		   Message requestmsg,replymsg;
 		   
-		   // TODO
-		   // - receive message containing RPC request
-		   // - find the identifier for the RPC methods to invoke
+		   // TODO - START
+		   // - receive Message containing RPC request
+		   // - find the identifier for the RPC method to invoke
 		   // - lookup the method to be invoked
 		   // - invoke the method
 		   // - send back message containing RPC reply
 			
-		   if (true) {
-			   throw new UnsupportedOperationException(TODO.method());
-		   }
+		   if (true)
+				throw new UnsupportedOperationException(TODO.method());
+		   
+		   // TODO - END
 		   
 		   if (rpcid == RPCCommon.RPIDSTOP) {
 			   stop = true;
@@ -57,7 +59,8 @@ public class RPCServer {
 	
 	}
 	
-	public void register(int rpcid, RPCImpl impl) {
+	// used by server side implementation to register themselves in the RPC server
+	public void register(byte rpcid, RPCRemoteImpl impl) {
 		services.put(rpcid, impl);
 	}
 	

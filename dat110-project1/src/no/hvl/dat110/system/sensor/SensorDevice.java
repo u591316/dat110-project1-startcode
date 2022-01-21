@@ -9,11 +9,9 @@ public class SensorDevice {
 		
 		System.out.println("Sensor server starting ...");
 		
-		SensorImpl sensor = new SensorImpl();
-		
 		RPCServer sensorserver = new RPCServer(Common.SENSORPORT);
-		
-	    sensorserver.register(1,sensor);
+
+		SensorImpl sensor = new SensorImpl((byte)1,sensorserver);
 		
 		sensorserver.run();
 		

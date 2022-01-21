@@ -1,13 +1,17 @@
 package no.hvl.dat110.rpc;
 
-public class RPCServerStopImpl implements RPCImpl {
+public class RPCServerStopImpl extends RPCRemoteImpl {
 
-	// server-side (remote) implementation of the built-in stop RPC method
+	public RPCServerStopImpl(byte rpcid, RPCServer rpcserver) {
+		super(rpcid,rpcserver);
+	}
+	
+	// RPC server-side implementation of the built-in stop RPC method
 	public byte[] invoke(byte[] request) {
 		
 		RPCUtils.unmarshallVoid(request);
 		
-		byte[] reply = RPCUtils.marshallVoid(RPCCommon.RPIDSTOP); 
+		byte[] reply = RPCUtils.marshallVoid(); 
 		
 		stop(); 
 		

@@ -13,45 +13,51 @@ public class RPCClient {
 		msgclient = new MessagingClient(server,port);
 	}
 	
-	public void register(RPCStub remote) {
-		remote.register(this);
-	}
-	
 	public void connect() {
 		
-		// TODO: connect using the underlying messaging layer connection
+		// TODO - START
+		// connect using the underlying messaging layer connection
 		
-	    throw new UnsupportedOperationException(TODO.method());
-			
+		if (true)
+			throw new UnsupportedOperationException(TODO.method());
+		
+		// TODO - END
 	}
 	
 	public void disconnect() {
 		
-		// TODO: disconnect/close the underlying messaging connection
+		// TODO - START
+		// disconnect/close the underlying messaging connection
 		
-		throw new UnsupportedOperationException(TODO.method());
+		if (true)
+			throw new UnsupportedOperationException(TODO.method());
 		
+		// TODO - END
 	}
 	
-	public byte[] call(byte[] rpcrequest) {
+	public byte[] call(byte rpcid, byte[] params) {
 		
-		byte[] rpcreply;
+		byte[] returnval = null;
 		
-		/* TODO: 
+		// TODO - START 
 		
-		Make a remote call on the RPC server by sending the RPC request message
+		/* 
+		 * 
+		Make a remote call on the RPC server by sending an RPC request message
 		and receive an RPC reply message
 		
-		rpcrequest is the marshalled rpcrequest from the client-stub
-		rpctreply is the rpcreply to be unmarshalled by the client-stub
-		
+		params is the marshalled parameters from the client-stub
+				
+		The rpcid, params, and return value must be encapsulated/decapsulated
+		according to the RPC message format
+			
 		*/
-		
-		if (true) {
+				
+		if (true)
 			throw new UnsupportedOperationException(TODO.method());
-		}
 		
-		return rpcreply;
+		// TODO - END
+		return returnval;
 		
 	}
 
