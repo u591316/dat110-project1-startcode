@@ -9,8 +9,9 @@ public class Message {
 	public Message(byte[] data) {
 		
 		// TODO - START
+		this.data = data; 
 		
-		if (true)
+		if (data == null || data.length > 127)
 			throw new UnsupportedOperationException(TODO.constructor("Message"));
 			
 		// TODO - END
