@@ -24,7 +24,7 @@ public class MessagingClient {
 			Socket clientSocket = null; 
 		
 		try {
-			clientSocket = new Socket(MessageUtils.MESSAGINGHOST, MessageUtils.MESSAGINGPORT);
+			clientSocket = new Socket(server, port);
 			
 		} catch (UnknownHostException e) {
 			

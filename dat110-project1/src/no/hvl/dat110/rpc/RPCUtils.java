@@ -8,6 +8,8 @@ public class RPCUtils {
 	
 	public static byte[] encapsulate(byte rpcid, byte[] payload) {
 		
+	
+		
 		byte[] rpcmsg = new byte[payload.length+1];
 		
 		// TODO - START
@@ -38,8 +40,8 @@ public class RPCUtils {
 		
 		// Decapsulate the rpcid and payload in a byte array according to the  RPC message syntax
 		
-		for(int i = 1; i < rpcmsg.length; i++) {
-			payload[i-1] = rpcmsg[i]; 
+		for(int i = 0; i < rpcmsg.length-1; i++) {
+			payload[i] = rpcmsg[i+1]; 
 		}
 		
 //		if (true)
@@ -87,12 +89,12 @@ public class RPCUtils {
 		
 		// TODO - START 
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+//		if (true)
+//			throw new UnsupportedOperationException(TODO.method());
 				
 		// TODO - END
 		
-		return encoded;
+		return null;
 		
 	}
 	
@@ -100,8 +102,8 @@ public class RPCUtils {
 		
 		// TODO
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+//		if (true)
+//			throw new UnsupportedOperationException(TODO.method());
 		
 	}
 	
@@ -146,7 +148,7 @@ public class RPCUtils {
 	
 	public static int unmarshallInteger(byte[] data) {
 		
-	
+		int decoded = 0; 
 		
 		ByteBuffer b = ByteBuffer.wrap(data);
 		
@@ -157,7 +159,8 @@ public class RPCUtils {
 		
 		// TODO - END
 		
-		return b.getInt();
+		decoded = b.getInt();
+		return decoded;
 		
 	}
 }
