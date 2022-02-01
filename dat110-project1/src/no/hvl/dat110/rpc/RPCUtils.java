@@ -85,7 +85,7 @@ public class RPCUtils {
 	
 	public static byte[] marshallVoid() {
 		
-		byte[] encoded = null;
+		byte[] encoded = new byte[0];
 		
 		// TODO - START 
 		
@@ -94,7 +94,7 @@ public class RPCUtils {
 				
 		// TODO - END
 		
-		return null;
+		return encoded;
 		
 	}
 	
@@ -104,6 +104,7 @@ public class RPCUtils {
 		
 //		if (true)
 //			throw new UnsupportedOperationException(TODO.method());
+		return; 
 		
 	}
 	

@@ -43,18 +43,11 @@ public class RPCClient  {
 	
 	public byte[] call(byte rpcid, byte[] params) {
 		
-		connect(); 
-		
 		byte[] returnval = null;
 		
 		byte[] msg; 
 		
-		
-		
 		msg = RPCUtils.encapsulate(rpcid, params);
-		
-		
-		
 		// TODO - START 
 		
 		Message message = new Message(msg); 
@@ -64,11 +57,6 @@ public class RPCClient  {
 		Message reply = connection.receive(); 
 		
 		returnval = RPCUtils.decapsulate(reply.getData());
-		System.out.println("heei");
-		
-		
-		
-		
 		/* 
 		 * 
 		Make a remote call on the RPC server by sending an RPC request message
@@ -77,15 +65,9 @@ public class RPCClient  {
 		params is the marshalled parameters from the client-stub
 				
 		The rpcid, params, and return value must be encapsulated/decapsulated
-		according to the RPC message format
-			
-			
+		according to the RPC message format	
 		*/
-				
-//		if (true)
-//			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
+
 		return returnval;
 		
 	}

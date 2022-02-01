@@ -54,6 +54,7 @@ public class Connection {
 //			throw new UnsupportedOperationException(TODO.method());
 //			
 		// TODO - END
+		
 
 	}
 
@@ -65,7 +66,7 @@ public class Connection {
 		// TODO - START
 		// read a segment from the input stream and decapsulate into message
 		try {
-			
+		
 			data = inStream.readNBytes(MessageUtils.SEGMENTSIZE);
 			
 		} catch (IOException e) {
